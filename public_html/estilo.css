@@ -9,7 +9,6 @@ html, body {
     margin: 0;
     padding: 0;
     background-color:aliceblue;
-
 }
 #ladoIzquierdo {
     float: left;
@@ -17,7 +16,8 @@ html, body {
     height: 100%;
     margin: 0 auto;
     box-shadow:5px 0px 30px black;
-    border-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border-top-right-radius: 40px;
     background-color: white;
 }
 #ladoDerecho {
@@ -49,4 +49,19 @@ hr {
     height: 10px;
     background-color:aliceblue;
     border: none;
+}
+#carton {
+    width: 75%;
+    margin: auto;
+    background-color:dodgerblue;
+    border-radius: 30px;
+}
+#carton td {
+    border-radius: 30px;
+    background-color: white;
+    height: 100px;
+    width: 50px;
+    color: dodgerblue;
+    text-align: center;
+    font-size:xx-large;
 }
