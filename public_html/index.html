@@ -2,7 +2,7 @@
 <!---------------------------------
 Autor: Alamillo Arroyo, Sara
 Fecha creación: 27/01/2015
-Última modificación: 27/01/2015
+Última modificación: 01/02/2015
 Versión: 1.00
 ---------------------------------->
 <html>
@@ -10,9 +10,36 @@ Versión: 1.00
         <title>Bingo - Sara Alamillo Arroyo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="funciones.js" type="text/javascript"></script>
+        <link href="estilo.css" rel="stylesheet" type="text/css"/>
     </head>
-    <frameset cols="25%,*">
-        <frame name="frameConf" src="configuracion.html" />
-        <frame name="frameCarton" src="carton.html" />
-    </frameset>
+    <body>
+        <div id="ladoIzquierdo">
+	    <div id="informacion">
+		<h3>Práctica final de JavaScript </h3>
+		<h4>Sara Alamillo Arroyo </h4>
+		<h4>Desarrollo Web en Entorno Cliente </h4>
+		<h4>2º de Desarrollo de Aplicaciones Web </h4>
+	    </div>
+	<hr />
+	    <div id="tabla">
+		<div>
+		    <div id="columna">
+			Número de jugadores: <br />
+			Valor del cartón: 
+		    </div>
+		    <div id="columna">
+			<input type="number" min="5" max="20" id="numJugadores" onchange="validarJugadores()" /> <br />
+			<input type="number" min="1" max="5" id="valCarton" onchange="validarValor()" />
+		    </div>
+		</div>
+		<div>
+		    <input type="submit" value="Enviar" id="bEnviar" onclick="iniciarBingo()" />
+		</div>
+	    </div>
+        </div>
+        <div id="ladoDerecho">
+
+        </div>
+    </body>
 </html>

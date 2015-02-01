@@ -1,0 +1,52 @@
+/*********************************
+ Autor: Alamillo Arroyo, Sara
+ Fecha creación: 28/01/2015
+ Última modificación: 01/02/2015
+ Versión: 1.00
+ *********************************/
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color:aliceblue;
+
+}
+#ladoIzquierdo {
+    float: left;
+    width: 25%;
+    height: 100%;
+    margin: 0 auto;
+    box-shadow:5px 0px 30px black;
+    border-radius: 40px;
+    background-color: white;
+}
+#ladoDerecho {
+    float: left;    
+    width: 75%;
+    height: 100%;
+}
+
+input[type="number"] {
+    width: 125px;
+}
+#tabla{
+    margin: auto;
+    display: table;
+    text-align: center;
+}
+#columna{
+    text-align: right;
+    display: table-cell;
+    width: 150px;
+}
+#informacion {
+    text-align: center;
+}
+h4 {
+    line-height: 2px;
+}
+hr {
+    height: 10px;
+    background-color:aliceblue;
+    border: none;
+}

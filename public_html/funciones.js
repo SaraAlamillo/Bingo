@@ -1,12 +1,9 @@
 /*********************************
  Autor: Alamillo Arroyo, Sara
  Fecha creación: 27/01/2015
- Última modificación: 27/01/2015
+ Última modificación: 01/02/2015
  Versión: 1.00
  *********************************/
-
-var numJugadores;
-var valCarton;
 
 // Asigna eventos a los diferentes objetos
 var crearEvento = function () {
@@ -35,22 +32,23 @@ function validarValor() {
 }
 
 function iniciarBingo() {
-    numJugadores = document.getElementById("numJugadores").value;
-    valCarton = document.getElementById("valCarton").value;
+    document.getElementById("numJugadores").setAttribute("readonly", "true");
+    document.getElementById("valCarton").setAttribute("readonly", "true");
     dibujarCarton();
-    alert("ok");
 }
 function dibujarCarton() {
     var carton = document.createElement("table");
-   var ventana = document.getElementsByName("frameCarton")[0].body;
-   alert(ventana.getElementById("prueba").innerHTML);
+    carton.setAttribute("border", "1");
+   var capa = document.getElementById("ladoDerecho");
+  
     for (var i = 0, max = 3; i < max; i++) {
         var columna = document.createElement("tr");
-        for (var i = 0, max = 9; i < max; i++) {
+        for (var j = 0, max = 9; j < max; j++) {
             var celda = document.createElement("td");
             columna.appendChild(celda);
         }        
         carton.appendChild(columna);
     }
-    ventana.appendChild(carton);
+    capa.appendChild(carton);
+    document.getElementsByTagName("")
 }
