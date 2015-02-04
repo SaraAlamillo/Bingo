@@ -37,52 +37,68 @@ function iniciarBingo() {
     dibujarCarton();
 }
 function dibujarCarton() {
+    aleatoriosExistentes = []
     var carton = document.createElement("table");
     carton.setAttribute("id", "carton");
-   var capa = document.getElementById("ladoDerecho");
-   
-  
+    var capa = document.getElementById("ladoDerecho");
+
+
     for (var i = 0, max = 3; i < max; i++) {
         var columna = document.createElement("tr");
         for (var j = 0, max2 = 9; j < max2; j++) {
-	    var numAleatorio;
-	    switch(j) {
-		case 0:
-		    numAleatorio = Math.floor((Math.random() * 9) + 1); 
-		    break;
-		case 1:
-		    numAleatorio = Math.floor((Math.random() * 19) + 10); 
-		    break;
-		case 2:
-		    numAleatorio = Math.floor((Math.random() * 29) + 20); 
-		    break;
-		case 3:
-		    numAleatorio = Math.floor((Math.random() * 39) + 30); 
-		    break;
-		case 4:
-		    numAleatorio = Math.floor((Math.random() * 49) + 40); 
-		    break;
-		case 5:
-		    numAleatorio = Math.floor((Math.random() * 59) + 50); 
-		    break;
-		case 6:
-		    numAleatorio = Math.floor((Math.random() * 69) + 60); 
-		    break;
-		case 7:
-		    numAleatorio = Math.floor((Math.random() * 79) + 70); 
-		    break;
-		case 8:
-		    numAleatorio = Math.floor((Math.random() * 90) + 80); 
-		    break;
-	    }
+            var numAleatorio;
+            switch (j) {
+                case 0:
+                    numAleatorio = aleatorio(9, 1);
+                    break;
+                case 1:
+                    numAleatorio = aleatorio(19, 10);
+                    break;
+                case 2:
+                    numAleatorio = aleatorio(29, 20);
+                    break;
+                case 3:
+                    numAleatorio = aleatorio(39, 30);
+                    break;
+                case 4:
+                    numAleatorio = aleatorio(49, 40);
+                    break;
+                case 5:
+                    numAleatorio = aleatorio(59, 50);
+                    break;
+                case 6:
+                    numAleatorio = aleatorio(69, 60);
+                    break;
+                case 7:
+                    numAleatorio = aleatorio(79, 70);
+                    break;
+                case 8:
+                    numAleatorio = aleatorio(90, 80);
+                    break;
+            }
             var celda = document.createElement("td");
-	    var texto = document.createTextNode(numAleatorio);
-	    celda.appendChild(texto);
-	    celda.classList.add("numero");
+            var texto = document.createTextNode(numAleatorio);
+            celda.appendChild(texto);
+            celda.classList.add("numero");
             columna.appendChild(celda);
-        }        
+        }
         carton.appendChild(columna);
     }
     capa.appendChild(carton);
     document.getElementsByTagName("")
+}
+var aleatoriosExistentes;
+function aleatorio(max, min) {
+    var existente = false;
+    var numero;
+    do {
+        numero = Math.floor(Math.random() * (max - min + 1)) + min;
+        if (aleatoriosExistentes.indexOf(numero) != -1) {
+            existente = true;
+        } else {
+            aleatoriosExistentes.push(numero);
+            existente = false;
+        }
+    } while (existente);
+    return numero;
 }
