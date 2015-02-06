@@ -45,24 +45,32 @@ function dibujarCarton() {
 
     for (var i = 0, max = 3; i < max; i++) {
         var columna = document.createElement("tr");
+        var huecos = huecosVacios();
         for (var j = 0, max2 = 9; j < max2; j++) {
             var celda = document.createElement("td");
-            var texto = document.createTextNode(getNumeroAleatorio(j));
-            celda.appendChild(texto);
-            celda.classList.add("numero");
+            if (huecos[i] == j) {
+                celda.classList.add("numOculto");
+            } else {
+                var texto = document.createTextNode(getNumeroAleatorio(j));
+                celda.appendChild(texto);
+                celda.classList.add("numero");
+                crearEvento(celda, "click", marcarCelda);
+            }
             columna.appendChild(celda);
         }
-
-        var huecos = huecosVacios();
-        for (var k = 0, max3 = huecos.length; k < max3; k++) {
-            columna.childNodes[huecos[k]].childNodes[0].nodeValue = "";
-            columna.childNodes[huecos[k]].classList.add("numOculto");
-        }
-
         carton.appendChild(columna);
     }
     capa.appendChild(carton);
     document.getElementsByTagName("")
+}
+function marcarCelda() {
+    if (this.classList.contains("marcado")) {
+        this.classList.remove("marcado");
+        this.classList.add("numero");
+    } else {
+        this.classList.remove("numero");
+        this.classList.add("marcado");
+    }
 }
 
 var aleatoriosExistentes;
@@ -96,7 +104,7 @@ function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function huecosVacios() {
-    
+
     var numeros = [];
     for (var i = 0, max = 4; i < max; i++) {
         var existente = true;

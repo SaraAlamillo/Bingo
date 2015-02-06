@@ -58,7 +58,6 @@ hr {
 }
 #carton td {
     border-radius: 30px;
-    background-color: white;
     background-repeat: no-repeat;
     background-position: center;
     height: 100px;
@@ -67,6 +66,13 @@ hr {
     text-align: center;
     font-size:xx-large;
 }
+.numero {
+    background-color: white;
+}
 .numOculto {
+    background-color: white;
     background-image: url('img/bombo.png');
+}
+.marcado {
+    background-color: red;
 }
