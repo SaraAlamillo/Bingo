@@ -43,26 +43,52 @@ function dibujarCarton() {
     carton.setAttribute("id", "carton");
     var capa = document.getElementById("ladoDerecho");
 
-
     for (var i = 0, max = 3; i < max; i++) {
         var columna = document.createElement("tr");
         for (var j = 0, max2 = 9; j < max2; j++) {
             var celda = document.createElement("td");
-            var texto = document.createTextNode(aleatorio(j));
+            var texto = document.createTextNode(getNumeroAleatorio(j));
             celda.appendChild(texto);
             celda.classList.add("numero");
             columna.appendChild(celda);
         }
 
-
+        var huecos = huecosVacios();
+        alert(dump(huecos));
 
         carton.appendChild(columna);
     }
     capa.appendChild(carton);
     document.getElementsByTagName("")
 }
+function dump(arr, level) {
+    var dumped_text = "";
+    if (!level)
+        level = 0;
+
+    //The padding given at the beginning of the line.
+    var level_padding = "";
+    for (var j = 0; j < level + 1; j++)
+        level_padding += "    ";
+
+    if (typeof (arr) == 'object') { //Array/Hashes/Objects 
+        for (var item in arr) {
+            var value = arr[item];
+
+            if (typeof (value) == 'object') { //If it is an array,
+                dumped_text += level_padding + "'" + item + "' ...\n";
+                dumped_text += dump(value, level + 1);
+            } else {
+                dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+            }
+        }
+    } else { //Stings/Chars/Numbers etc.
+        dumped_text = "===>" + arr + "<===(" + typeof (arr) + ")";
+    }
+    return dumped_text;
+}
 var aleatoriosExistentes;
-function aleatorio(columna) {
+function getNumeroAleatorio(columna) {
     var existente = false;
     var max;
     var min;
@@ -78,7 +104,7 @@ function aleatorio(columna) {
     }
     var numero;
     do {
-        numero = Math.floor(Math.random() * (max - min + 1)) + min;
+        numero = aleatorio(min, max);
         if (aleatoriosExistentes.indexOf(numero) != -1) {
             existente = true;
         } else {
@@ -87,4 +113,22 @@ function aleatorio(columna) {
         }
     } while (existente);
     return numero;
+}
+function aleatorio(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function huecosVacios() {
+    var existente = true;
+    var numeros = [];
+    for (var i = 0, max = 4; i < max; i++) {
+        do {
+            var numero = aleatorio(0, 8);
+            if (numeros.indexOf(numero) == -1) {
+                numeros.push(numero);
+                existente = false;
+            }
+        } while (existente);
+    }
+    alert(dump(numeros));
+    return numeros;
 }
