@@ -1,7 +1,7 @@
 /*********************************
  Autor: Alamillo Arroyo, Sara
  Fecha creación: 27/01/2015
- Última modificación: 01/02/2015
+ Última modificación: 06/02/2015
  Versión: 1.00
  *********************************/
 
@@ -54,39 +54,17 @@ function dibujarCarton() {
         }
 
         var huecos = huecosVacios();
-        alert(dump(huecos));
+        for (var k = 0, max3 = huecos.length; k < max3; k++) {
+            columna.childNodes[huecos[k]].childNodes[0].nodeValue = "";
+            columna.childNodes[huecos[k]].classList.add("numOculto");
+        }
 
         carton.appendChild(columna);
     }
     capa.appendChild(carton);
     document.getElementsByTagName("")
 }
-function dump(arr, level) {
-    var dumped_text = "";
-    if (!level)
-        level = 0;
 
-    //The padding given at the beginning of the line.
-    var level_padding = "";
-    for (var j = 0; j < level + 1; j++)
-        level_padding += "    ";
-
-    if (typeof (arr) == 'object') { //Array/Hashes/Objects 
-        for (var item in arr) {
-            var value = arr[item];
-
-            if (typeof (value) == 'object') { //If it is an array,
-                dumped_text += level_padding + "'" + item + "' ...\n";
-                dumped_text += dump(value, level + 1);
-            } else {
-                dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
-            }
-        }
-    } else { //Stings/Chars/Numbers etc.
-        dumped_text = "===>" + arr + "<===(" + typeof (arr) + ")";
-    }
-    return dumped_text;
-}
 var aleatoriosExistentes;
 function getNumeroAleatorio(columna) {
     var existente = false;
@@ -118,9 +96,10 @@ function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function huecosVacios() {
-    var existente = true;
+    
     var numeros = [];
     for (var i = 0, max = 4; i < max; i++) {
+        var existente = true;
         do {
             var numero = aleatorio(0, 8);
             if (numeros.indexOf(numero) == -1) {
@@ -129,6 +108,5 @@ function huecosVacios() {
             }
         } while (existente);
     }
-    alert(dump(numeros));
     return numeros;
 }
