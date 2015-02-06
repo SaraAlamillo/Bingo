@@ -34,6 +34,7 @@ function validarValor() {
 function iniciarBingo() {
     document.getElementById("numJugadores").setAttribute("readonly", "true");
     document.getElementById("valCarton").setAttribute("readonly", "true");
+    document.getElementById("bEnviar").setAttribute("disabled", "true");
     dibujarCarton();
 }
 function dibujarCarton() {
@@ -46,50 +47,35 @@ function dibujarCarton() {
     for (var i = 0, max = 3; i < max; i++) {
         var columna = document.createElement("tr");
         for (var j = 0, max2 = 9; j < max2; j++) {
-            var numAleatorio;
-            switch (j) {
-                case 0:
-                    numAleatorio = aleatorio(9, 1);
-                    break;
-                case 1:
-                    numAleatorio = aleatorio(19, 10);
-                    break;
-                case 2:
-                    numAleatorio = aleatorio(29, 20);
-                    break;
-                case 3:
-                    numAleatorio = aleatorio(39, 30);
-                    break;
-                case 4:
-                    numAleatorio = aleatorio(49, 40);
-                    break;
-                case 5:
-                    numAleatorio = aleatorio(59, 50);
-                    break;
-                case 6:
-                    numAleatorio = aleatorio(69, 60);
-                    break;
-                case 7:
-                    numAleatorio = aleatorio(79, 70);
-                    break;
-                case 8:
-                    numAleatorio = aleatorio(90, 80);
-                    break;
-            }
             var celda = document.createElement("td");
-            var texto = document.createTextNode(numAleatorio);
+            var texto = document.createTextNode(aleatorio(j));
             celda.appendChild(texto);
             celda.classList.add("numero");
             columna.appendChild(celda);
         }
+
+
+
         carton.appendChild(columna);
     }
     capa.appendChild(carton);
     document.getElementsByTagName("")
 }
 var aleatoriosExistentes;
-function aleatorio(max, min) {
+function aleatorio(columna) {
     var existente = false;
+    var max;
+    var min;
+    if (columna == 0) {
+        min = 1;
+    } else {
+        min = columna * 10
+    }
+    if (columna == 8) {
+        max = min + 10;
+    } else {
+        max = min + 9;
+    }
     var numero;
     do {
         numero = Math.floor(Math.random() * (max - min + 1)) + min;

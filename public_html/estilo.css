@@ -53,15 +53,20 @@ hr {
 #carton {
     width: 75%;
     margin: auto;
-    background-color:dodgerblue;
+    background-color: #090fe2;
     border-radius: 30px;
 }
 #carton td {
     border-radius: 30px;
     background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
     height: 100px;
     width: 50px;
-    color: dodgerblue;
+    color: #090fe2;
     text-align: center;
     font-size:xx-large;
+}
+.numOculto {
+    background-image: url('img/bombo.png');
 }
