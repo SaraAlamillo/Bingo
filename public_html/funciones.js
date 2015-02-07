@@ -35,7 +35,15 @@ function iniciarBingo() {
     document.getElementById("numJugadores").setAttribute("readonly", "true");
     document.getElementById("valCarton").setAttribute("readonly", "true");
     document.getElementById("bEnviar").setAttribute("disabled", "true");
+    dibujarBombo();
     dibujarCarton();
+}
+function dibujarBombo() {
+    var bombo = document.createElement("div");
+    bombo.setAttribute("id", "bombo");
+    var capa = document.getElementById("ladoDerecho");
+    capa.appendChild(bombo);
+    
 }
 function dibujarCarton() {
     aleatoriosExistentes = []
@@ -48,7 +56,8 @@ function dibujarCarton() {
         var huecos = huecosVacios();
         for (var j = 0, max2 = 9; j < max2; j++) {
             var celda = document.createElement("td");
-            if (huecos[i] == j) {
+            if (huecos.indexOf(j) != -1) {
+		alert("oculto" + j);
                 celda.classList.add("numOculto");
             } else {
                 var texto = document.createTextNode(getNumeroAleatorio(j));

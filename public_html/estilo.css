@@ -76,3 +76,12 @@ hr {
 .marcado {
     background-color: red;
 }
+#bombo {
+    background-color: #090fe2;
+    color: white;
+    margin: auto;
+    height: 100px;
+    width: 100px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
