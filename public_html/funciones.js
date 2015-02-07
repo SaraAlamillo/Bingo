@@ -39,15 +39,16 @@ function iniciarBingo() {
     dibujarCarton();
     comenzarJuego();
 }
+var intervalo;
 function comenzarJuego() {
     numerosCarton = [];
-    setInterval(function () {
+    intervalo = setInterval(function () {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function () {
 	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 		var bombo = document.getElementById("bombo");
 		if (bombo.childElementCount != 0) {
-		    bombo.removeChild(bombo.childNodes[0]);		    
+		    bombo.removeChild(bombo.childNodes[0]);
 		}
 		var p = document.createElement("p");
 		var texto = document.createTextNode(xmlhttp.responseText);
@@ -56,33 +57,35 @@ function comenzarJuego() {
 		bombo.appendChild(p);
 	    }
 	}
-
 	xmlhttp.open("POST", "bombo.php", true);
 	xmlhttp.send();
     }, 1000);
-}function dump(arr,level) {
-	var dumped_text = "";
-	if(!level) level = 0;
-	
-	//The padding given at the beginning of the line.
-	var level_padding = "";
-	for(var j=0;j<level+1;j++) level_padding += "    ";
-	
-	if(typeof(arr) == 'object') { //Array/Hashes/Objects 
-		for(var item in arr) {
-			var value = arr[item];
-			
-			if(typeof(value) == 'object') { //If it is an array,
-				dumped_text += level_padding + "'" + item + "' ...\n";
-				dumped_text += dump(value,level+1);
-			} else {
-				dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
-			}
-		}
-	} else { //Stings/Chars/Numbers etc.
-		dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
+}
+function dump(arr, level) {
+    var dumped_text = "";
+    if (!level)
+	level = 0;
+
+    //The padding given at the beginning of the line.
+    var level_padding = "";
+    for (var j = 0; j < level + 1; j++)
+	level_padding += "    ";
+
+    if (typeof (arr) == 'object') { //Array/Hashes/Objects 
+	for (var item in arr) {
+	    var value = arr[item];
+
+	    if (typeof (value) == 'object') { //If it is an array,
+		dumped_text += level_padding + "'" + item + "' ...\n";
+		dumped_text += dump(value, level + 1);
+	    } else {
+		dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+	    }
 	}
-	return dumped_text;
+    } else { //Stings/Chars/Numbers etc.
+	dumped_text = "===>" + arr + "<===(" + typeof (arr) + ")";
+    }
+    return dumped_text;
 }
 
 function conectarConElBombo() {
@@ -130,7 +133,25 @@ function dibujarCarton() {
 	carton.appendChild(columna);
     }
     capa.appendChild(carton);
-    document.getElementsByTagName("")
+    var boton = document.createElement("button");
+    var textoBoton = document.createTextNode("¡Bingo!");
+    boton.appendChild(textoBoton);
+    crearEvento(boton, "click", cantarBingo);
+    capa.appendChild(boton);
+}
+function cantarBingo() {
+    clearInterval(intervalo);
+    var numerosUsuario = [];
+    var carton = document.getElementById("carton");
+    var casillas = carton.getElementsByTagName("td");
+    for (var i = 0, max = casillas.length; i < max; i++) {
+	if (casillas[i].classList.contains("marcado")) {
+	    numerosUsuario.push(casillas[i].contents().filter(function () {
+		return this.nodeType == 3;
+	    }).text());
+	}
+    }
+    alert(dump(numerosUsuario));
 }
 function marcarCelda() {
     if (this.classList.contains("marcado")) {
