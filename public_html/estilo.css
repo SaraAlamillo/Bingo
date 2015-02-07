@@ -84,4 +84,7 @@ hr {
     width: 100px;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
+    text-align: center;
+    font-size:xx-large;
+    padding: auto;
 }
