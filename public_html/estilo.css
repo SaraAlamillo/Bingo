@@ -62,12 +62,12 @@ hr {
     background-position: center;
     height: 100px;
     width: 50px;
-    color: #090fe2;
     text-align: center;
     font-size:xx-large;
 }
 .numero {
     background-color: white;
+    color: #090fe2;
 }
 .numOculto {
     background-color: white;
@@ -75,6 +75,7 @@ hr {
 }
 .marcado {
     background-color: red;
+    color: white;
 }
 #bombo {
     background-color: #090fe2;
