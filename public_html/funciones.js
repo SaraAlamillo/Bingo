@@ -1,7 +1,7 @@
 /*********************************
  Autor: Alamillo Arroyo, Sara
  Fecha creación: 27/01/2015
- Última modificación: 06/02/2015
+ Última modificación: 10/02/2015
  Versión: 1.00
  *********************************/
 var numerosCarton;
@@ -42,24 +42,7 @@ function iniciarBingo() {
 var intervalo;
 function comenzarJuego() {
     numerosCarton = [];
-    intervalo = setInterval(function () {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var bombo = document.getElementById("bombo");
-                if (bombo.childElementCount != 0) {
-                    bombo.removeChild(bombo.childNodes[0]);
-                }
-                var p = document.createElement("p");
-                var texto = document.createTextNode(xmlhttp.responseText);
-                numerosCarton.push(xmlhttp.responseText);
-                p.appendChild(texto);
-                bombo.appendChild(p);
-            }
-        }
-        xmlhttp.open("POST", "bombo.php", true);
-        xmlhttp.send()
-    }, 1000);
+    intervalo = setInterval(getNumeroBombo, 2000);
 }
 function dump(arr, level) {
     var dumped_text = "";
@@ -88,25 +71,32 @@ function dump(arr, level) {
     return dumped_text;
 }
 
-function conectarConElBombo() {
-    alert("ok");
-    /*var xmlhttp = new XMLHttpRequest();
-     xmlhttp.onreadystatechange = function () {
-     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-     var bombo = document.getElementById("bombo");
-     var texto = document.createTextNode(xmlhttp.responseText);
-     bombo.appendChild(texto);
-     }
-     }
-     
-     xmlhttp.open("POST", "bombo.php", true);
-     xmlhttp.send();*/
+function getNumeroBombo() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var bombo = document.getElementById("bombo");
+            if (numerosCarton.indexOf(xmlhttp.responseText) == -1) {
+                bombo.childNodes[0].nodeValue = xmlhttp.responseText;
+                numerosCarton.push(xmlhttp.responseText);
+                bombo.appendChild(p);
+            } else {
+                return getNumeroBombo();
+            }
+
+        }
+    }
+    xmlhttp.open("POST", "bombo.php", true);
+    xmlhttp.send()
 }
 function dibujarBombo() {
-    var bombo = document.createElement("div");
-    bombo.setAttribute("id", "bombo");
     var capa = document.getElementById("ladoDerecho");
+    capa.appendChild(document.createElement("br"));
+    var bombo = document.createElement("div");
+    bombo.appendChild(document.createTextNode(""));
+    bombo.setAttribute("id", "bombo");
     capa.appendChild(bombo);
+    capa.appendChild(document.createElement("br"));
 
 }
 function dibujarCarton() {
@@ -140,7 +130,6 @@ function dibujarCarton() {
     capa.appendChild(boton);
 }
 function cantarBingo() {
-    clearInterval(intervalo);
     var numerosUsuario = [];
     var carton = document.getElementById("carton");
     var casillas = carton.getElementsByTagName("td");
@@ -149,25 +138,29 @@ function cantarBingo() {
             numerosUsuario.push(casillas[i].childNodes[0].nodeValue);
         }
     }
-    if ((numerosUsuario.length != numerosCarton.length) || numerosUsuario.length == 0 || numerosCarton.length == 0) {
-        alert("distinto");
+    var capa = document.getElementById("ladoDerecho");
+    if (comprobarCarton(numerosUsuario)) {
+        capa.appendChild(document.createTextNode("true"));
     } else {
-        if (comprobarCarton(numerosUsuario)) {
-            alert("true");
-        } else {
-            alert("false");
-        }
+        capa.appendChild(document.createTextNode("false"));
     }
 }
 function comprobarCarton(numerosUsuario) {
-    numerosUsuario.sort();
-    numerosCarton.sort();
-    for (var i = 0, max = numerosUsuario.length; i < max; i++) {
-        if (numerosUsuario[i] != numerosCarton[i]) {
-            return false;
+    var filas = 3;
+    var columnas = 9;
+    var huecos = 4;
+    var casillasSeleccionadas = eval(columnas * filas - huecos * filas);
+    
+    if (numerosUsuario.length != casillasSeleccionadas) {
+        return false;
+    } else {
+        for (var i = 0, max = numerosUsuario.length; i < max; i++) {
+            if (numerosCarton.indexOf(numerosUsuario[i]) == -1) {
+                return false;
+            }
         }
+        return true;
     }
-    return true;
 }
 function marcarCelda() {
     if (this.classList.contains("marcado")) {
