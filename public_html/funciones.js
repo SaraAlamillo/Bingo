@@ -138,9 +138,9 @@ function cantarBingo() {
             numerosUsuario.push(casillas[i].childNodes[0].nodeValue);
         }
     }
-    var capa = document.getElementById("ladoDerecho");
+    
     if (comprobarCarton(numerosUsuario)) {
-        capa.appendChild(document.createTextNode("true"));
+        window.open();
     } else {
         capa.appendChild(document.createTextNode("false"));
     }
