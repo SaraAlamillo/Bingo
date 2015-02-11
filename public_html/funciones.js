@@ -10,11 +10,9 @@ var crearEvento = function () {
     function crearEvento(objeto, evento, funcion) {
         objeto.addEventListener(evento, funcion, false);
     }
-
     if (typeof window.addEventListener !== 'undefined') {
         return crearEvento;
     }
-
 }();
 
 function validarJugadores() {
@@ -117,10 +115,16 @@ function cantarBingo() {
     }
 
     if (comprobarCarton(numerosUsuario)) {
-        window.open("bingoCorrecto.html", "_blank", "width=700,height=400");
+        var ventana = window.open("bingoCorrecto.html", "_blank", "width=700,height=400");
+        ventana.onload = function () {
+            ventana.document.getElementById('premio').innerHTML = calcularPremio();
+        };
     } else {
         window.open("bingoIncorrecto.html", "_blank", "width=550,height=250");
     }
+}
+function calcularPremio() {
+    return (document.getElementById("numJugadores").value * document.getElementById("valCarton").value) * 0.8;
 }
 function comprobarCarton(numerosUsuario) {
     var filas = 3;
