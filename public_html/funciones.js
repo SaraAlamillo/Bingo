@@ -1,7 +1,7 @@
 /*********************************
  Autor: Alamillo Arroyo, Sara
  Fecha creación: 27/01/2015
- Última modificación: 10/02/2015
+ Última modificación: 11/02/2015
  Versión: 1.00
  *********************************/
 var numerosCarton;
@@ -79,7 +79,6 @@ function getNumeroBombo() {
             if (numerosCarton.indexOf(xmlhttp.responseText) == -1) {
                 bombo.childNodes[0].nodeValue = xmlhttp.responseText;
                 numerosCarton.push(xmlhttp.responseText);
-                bombo.appendChild(p);
             } else {
                 return getNumeroBombo();
             }
@@ -130,6 +129,7 @@ function dibujarCarton() {
     capa.appendChild(boton);
 }
 function cantarBingo() {
+    clearInterval(Intervalo);
     var numerosUsuario = [];
     var carton = document.getElementById("carton");
     var casillas = carton.getElementsByTagName("td");
@@ -140,9 +140,9 @@ function cantarBingo() {
     }
     
     if (comprobarCarton(numerosUsuario)) {
-        window.open();
+        window.open("bingoCorrecto.html", "_blank","width=700,height=400");
     } else {
-        capa.appendChild(document.createTextNode("false"));
+        window.open("bingoIncorrecto.html", "_blank","width=550,height=250");
     }
 }
 function comprobarCarton(numerosUsuario) {
