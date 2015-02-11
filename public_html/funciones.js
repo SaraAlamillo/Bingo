@@ -32,12 +32,16 @@ function validarValor() {
 }
 
 function iniciarBingo() {
-    document.getElementById("numJugadores").setAttribute("readonly", "true");
-    document.getElementById("valCarton").setAttribute("readonly", "true");
-    document.getElementById("bEnviar").setAttribute("disabled", "true");
-    dibujarBombo();
-    dibujarCarton();
-    comenzarJuego();
+    if (document.getElementById("valCarton").value == "" || document.getElementById("numJugadores").value == "") {
+        alert("Debe establecer un valor para el cartón y un número de jugadores.");
+    } else {
+        document.getElementById("numJugadores").setAttribute("readonly", "true");
+        document.getElementById("valCarton").setAttribute("readonly", "true");
+        document.getElementById("bEnviar").setAttribute("disabled", "true");
+        dibujarBombo();
+        dibujarCarton();
+        comenzarJuego();
+    }
 }
 var intervalo;
 function comenzarJuego() {
@@ -138,11 +142,11 @@ function cantarBingo() {
             numerosUsuario.push(casillas[i].childNodes[0].nodeValue);
         }
     }
-    
+
     if (comprobarCarton(numerosUsuario)) {
-        window.open("bingoCorrecto.html", "_blank","width=700,height=400");
+        window.open("bingoCorrecto.html", "_blank", "width=700,height=400");
     } else {
-        window.open("bingoIncorrecto.html", "_blank","width=550,height=250");
+        window.open("bingoIncorrecto.html", "_blank", "width=550,height=250");
     }
 }
 function comprobarCarton(numerosUsuario) {
@@ -150,7 +154,7 @@ function comprobarCarton(numerosUsuario) {
     var columnas = 9;
     var huecos = 4;
     var casillasSeleccionadas = eval(columnas * filas - huecos * filas);
-    
+
     if (numerosUsuario.length != casillasSeleccionadas) {
         return false;
     } else {
