@@ -1,7 +1,7 @@
 /*********************************
  Autor: Alamillo Arroyo, Sara
  Fecha creación: 27/01/2015
- Última modificación: 11/02/2015
+ Última modificación: 12/02/2015
  Versión: 1.00
  *********************************/
 var numerosCarton;
@@ -97,11 +97,15 @@ function dibujarCarton() {
         carton.appendChild(columna);
     }
     capa.appendChild(carton);
+    capa.appendChild(document.createElement("br"));
+    var capaBoton = document.createElement("div");
+    capaBoton.setAttribute("id", "boton");
     var boton = document.createElement("button");
     var textoBoton = document.createTextNode("¡Bingo!");
     boton.appendChild(textoBoton);
     crearEvento(boton, "click", cantarBingo);
-    capa.appendChild(boton);
+    capaBoton.appendChild(boton);
+    capa.appendChild(capaBoton);
 }
 function cantarBingo() {
     clearInterval(intervalo);

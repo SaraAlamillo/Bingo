@@ -1,7 +1,7 @@
 /*********************************
  Autor: Alamillo Arroyo, Sara
  Fecha creación: 28/01/2015
- Última modificación: 11/02/2015
+ Última modificación: 12/02/2015
  Versión: 1.00
  *********************************/
 html, body {
@@ -24,6 +24,28 @@ html, body {
     float: left;    
     width: 75%;
     height: 100%;
+}
+#boton {
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+#boton button {
+    background-color: #090fe2;
+    border-color:white;
+    border-style:dotted;
+    color: white;
+    font-size: 25px;
+}
+#boton button:hover {
+    border-color:#000033
+}
+#boton button:active {
+    border-color: white;
+    border-radius: 50%;
+    outline: none;
+    font-size: 50px;
 }
 
 input[type="number"] {
