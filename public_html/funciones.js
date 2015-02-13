@@ -44,7 +44,7 @@ function iniciarBingo() {
 }
 var intervalo;
 function comenzarJuego() {
-    intervalo = setInterval(getNumeroBombo, 2000);
+    intervalo = setInterval(getNumeroBombo, 5000);
 }
 
 function getNumeroBombo() {
@@ -80,7 +80,7 @@ function dibujarCarton() {
     var capa = document.getElementById("ladoDerecho");
 
     for (var i = 0, max = 3; i < max; i++) {
-        var columna = document.createElement("tr");
+        var fila = document.createElement("tr");
         var huecos = huecosVacios();
         for (var j = 0, max2 = 9; j < max2; j++) {
             var celda = document.createElement("td");
@@ -92,9 +92,9 @@ function dibujarCarton() {
                 celda.classList.add("numero");
                 crearEvento(celda, "click", marcarCelda);
             }
-            columna.appendChild(celda);
+            fila.appendChild(celda);
         }
-        carton.appendChild(columna);
+        carton.appendChild(fila);
     }
     capa.appendChild(carton);
     capa.appendChild(document.createElement("br"));
