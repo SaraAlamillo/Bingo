@@ -7,20 +7,21 @@ Versión: 1.00
 -->
 <html>
     <head>
-	<title>Bingo Correcto</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="estiloVentanas.css" rel="stylesheet" type="text/css"/>
+        <title>Bingo Correcto</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="estiloVentanas.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-	
-	<div id="ladoIzquierdo">
-	<img src="img/ganador.png" />
-	</div>
-	<div id="ladoDerecho">
-	    <h1>¡¡Ha sido el ganador!!</h1>
+
+        <div id="ladoIzquierdo">
+            <img src="img/ganador.png" />
+        </div>
+        <div id="ladoDerecho">
+            <h1>¡¡Ha sido el ganador!!</h1>
             <h3>Su premio es: <span id="premio">...</span></h3>
-            <button onclick="window.opener.location.reload(); window.close();">Comenzar juego nuevo</button>
-	</div>
+            <button onclick="window.opener.location.reload();
+                    window.close();">Comenzar juego nuevo</button>
+        </div>
     </body>
 </html>

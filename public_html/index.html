@@ -4,41 +4,41 @@ Autor: Alamillo Arroyo, Sara
 Fecha creación: 27/01/2015
 Última modificación: 06/02/2015
 Versión: 1.00
- -->
+-->
 <html>
     <head>
         <title>Bingo - Sara Alamillo Arroyo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery.js" type="text/javascript"></script>
         <script src="funciones.js" type="text/javascript"></script>
         <link href="estiloIndex.css" rel="stylesheet" type="text/css"/>
-	<script src="jquery-2.1.3.min.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="ladoIzquierdo">
-	    <div id="informacion">
-		<h3>Práctica final de JavaScript </h3>
-		<h4>Sara Alamillo Arroyo </h4>
-		<h4>Desarrollo Web en Entorno Cliente </h4>
-		<h4>2º de Desarrollo de Aplicaciones Web </h4>
-	    </div>
-	<hr />
-	    <div id="tabla">
-		<div>
-		    <div id="columna">
-			Número de jugadores: <br />
-			Valor del cartón: 
-		    </div>
-		    <div id="columna">
-			<input type="number" min="5" max="20" id="numJugadores" onchange="validarJugadores()" /><br />
-			<input type="number" min="1" max="5" id="valCarton" onchange="validarValor()" />
-		    </div>
-		</div>
+            <div id="informacion">
+                <h3>Práctica final de JavaScript </h3>
+                <h4>Sara Alamillo Arroyo </h4>
+                <h4>Desarrollo Web en Entorno Cliente </h4>
+                <h4>2º de Desarrollo de Aplicaciones Web </h4>
+            </div>
+            <hr />
+            <div id="tabla">
+                <div>
+                    <div id="columna">
+                        Número de jugadores: <br />
+                        Valor del cartón: 
+                    </div>
+                    <div id="columna">
+                        <input type="number" min="5" max="20" id="numJugadores" onchange="validarJugadores()" /><br />
+                        <input type="number" min="1" max="5" id="valCarton" onchange="validarValor()" />
+                    </div>
+                </div>
                 <br />
-		<div>
-		    <input type="submit" value="Comenzar juego" id="bEnviar" onclick="iniciarBingo()" />
-		</div>
-	    </div>
+                <div>
+                    <input type="submit" value="Comenzar juego" id="bEnviar" onclick="iniciarBingo()" />
+                </div>
+            </div>
         </div>
         <div id="ladoDerecho"></div>
     </body>
