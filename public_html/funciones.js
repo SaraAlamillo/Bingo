@@ -25,36 +25,35 @@ var crearEvento = function () {
  * Comprueba si el valor del campo numJugadores está comprendido entre 5 y 20
  */
 function validarJugadores() {
-    var valor = document.getElementById("numJugadores").value;
-    if (valor < 5 || valor > 20) {
-        document.getElementById("numJugadores").value = "";
+    if ($("#numJugadores").val() < 5 || $("#numJugadores").val() > 20) {
+        $("#numJugadores").val("");
     }
 }
 /**
  * Comprueba si el valor del campo valCarton está comprendido entre 1 y 5
  */
 function validarValor() {
-    var valor = document.getElementById("valCarton").value;
-    if (valor < 1 || valor > 5) {
-        document.getElementById("valCarton").value = "";
+    if ($("#valCarton").val() < 1 || $("#valCarton").val() > 5) {
+        $("#valCarton").val("");
     }
 }
 /**
  * Muestra por pantalla el bombo, el cartón y comienza el juego
  */
 function iniciarBingo() {
-    if (document.getElementById("valCarton").value == "" || document.getElementById("numJugadores").value == "") {
+    if ($("#numJugadores").val() == "" || $("#valCarton").val() == "") {
         alert("Debe establecer un valor para el cartón y un número de jugadores.");
     } else {
-        document.getElementById("numJugadores").setAttribute("readonly", "true");
-        document.getElementById("valCarton").setAttribute("readonly", "true");
-        document.getElementById("bEnviar").setAttribute("disabled", "true");
+        $("#numJugadores").attr("readonly", "true");
+        $("#valCarton").attr("readonly", "true");
+        $("#bEnviar").attr("disabled", "true");
         dibujarBombo();
         dibujarCarton();
         numerosSalidosBombo = [];
         comenzarJuego();
     }
 }
+
 /**
  * Contiene el identificador del intervalo 
  * @type Number
@@ -73,9 +72,8 @@ function getNumeroBombo() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var bombo = document.getElementById("bombo");
             if (numerosSalidosBombo.indexOf(xmlhttp.responseText) == -1) {
-                bombo.childNodes[0].nodeValue = xmlhttp.responseText;
+                $("#bombo").text(xmlhttp.responseText);
                 numerosSalidosBombo.push(xmlhttp.responseText);
             } else {
                 return getNumeroBombo();
@@ -89,13 +87,9 @@ function getNumeroBombo() {
  * Crea la capa para mostrar los números aleatorios del bombo
  */
 function dibujarBombo() {
-    var capa = document.getElementById("ladoDerecho");
-    capa.appendChild(document.createElement("br"));
-    var bombo = document.createElement("div");
-    bombo.appendChild(document.createTextNode(""));
-    bombo.setAttribute("id", "bombo");
-    capa.appendChild(bombo);
-    capa.appendChild(document.createElement("br"));
+    $("#ladoDerecho").append("<br />");
+    $("#ladoDerecho").append("<div id='bombo'> </div>");
+    $("#ladoDerecho").append("<br />");
 
 }
 /**
@@ -103,37 +97,32 @@ function dibujarBombo() {
  */
 function dibujarCarton() {
     aleatoriosExistentes = []
-    var carton = document.createElement("table");
-    carton.setAttribute("id", "carton");
-    var capa = document.getElementById("ladoDerecho");
-
-    for (var i = 0, max = 3; i < max; i++) {
-        var fila = document.createElement("tr");
-        var huecos = huecosVacios();
-        for (var j = 0, max2 = 9; j < max2; j++) {
-            var celda = document.createElement("td");
-            if (huecos.indexOf(j) != -1) {
-                celda.classList.add("numOculto");
-            } else {
-                var texto = document.createTextNode(getNumeroAleatorio(j));
-                celda.appendChild(texto);
-                celda.classList.add("numero");
-                crearEvento(celda, "click", marcarCelda);
+    $("#ladoDerecho").append(function () {
+        var html = "<table id='carton'>";
+        for (var i = 0, max = 3; i < max; i++) {
+            html += "<tr>";
+            var huecos = huecosVacios();
+            for (var j = 0, max2 = 9; j < max2; j++) {
+                html += "<td";
+                if (huecos.indexOf(j) != -1) {
+                    html += " class='numOculto'>";
+                } else {
+                    html += " class='numero'>";
+                    html += getNumeroAleatorio(j);
+                }
+                html += "</td>";
             }
-            fila.appendChild(celda);
+            html += "</tr>";
         }
-        carton.appendChild(fila);
+        html += "</table>";
+        return html;
     }
-    capa.appendChild(carton);
-    capa.appendChild(document.createElement("br"));
-    var capaBoton = document.createElement("div");
-    capaBoton.setAttribute("id", "boton");
-    var boton = document.createElement("button");
-    var textoBoton = document.createTextNode("¡Bingo!");
-    boton.appendChild(textoBoton);
-    crearEvento(boton, "click", cantarBingo);
-    capaBoton.appendChild(boton);
-    capa.appendChild(capaBoton);
+    );
+
+    // TODO: crearEvento(celda, "click", marcarCelda);
+     $("#ladoDerecho").append("<br />");
+     $("#ladoDerecho").append("<div id='boton'><button>¡Bingo!</button></div>");
+     // TODO: crearEvento(boton, "click", cantarBingo);
 }
 /**
  * Comprueba si el bingo se ha cantado correctamente o no
