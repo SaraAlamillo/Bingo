@@ -63,7 +63,7 @@ var intervalo;
  * Comienza el intervalo para que se muestren los números del bombo al usuario
  */
 function comenzarJuego() {
-    intervalo = setInterval(getNumeroBombo, 1500);
+    intervalo = setInterval(getNumeroBombo, 2000);
 }
 /**
  * Obtiene del servidor el número aleatorio para el bombo
@@ -155,7 +155,7 @@ function cantarBingo() {
  * @returns Number Valor del premio
  */
 function calcularPremio() {
-    return (document.getElementById("numJugadores").value * document.getElementById("valCarton").value) * 0.8;
+    return ($("#numJugadores").val() * $("#valCarton").val()) * 0.8;
 }
 /**
  * Comprueba si los números que ha marcado el usuario han salido el bombo previamente
@@ -183,12 +183,10 @@ function comprobarCarton(numerosUsuario) {
  * Si una celda está marcada, la desmarca y viceversa
  */
 function marcarCelda() {
-    if (this.classList.contains("marcado")) {
-	this.classList.remove("marcado");
-	this.classList.add("numero");
+    if ($(this).hasClass("marcado")) {
+	$(this).removeClass( "marcado" ).addClass( "numero" );
     } else {
-	this.classList.remove("numero");
-	this.classList.add("marcado");
+	$(this).removeClass( "numero" ).addClass( "marcado" );
     }
 }
 /**
