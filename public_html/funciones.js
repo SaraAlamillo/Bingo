@@ -51,7 +51,7 @@ var intervalo;
  * Comienza el intervalo para que se muestren los números del bombo al usuario
  */
 function comenzarJuego() {
-    intervalo = setInterval(getNumeroBombo, 2000);
+    intervalo = setInterval(getNumeroBombo, 5000);
 }
 /**
  * Obtiene del servidor el número aleatorio para el bombo
@@ -68,8 +68,12 @@ function getNumeroBombo(numero) {
             timeout: 4000
         });
     } else {
-        $("#bombo").text(numero);
-        numerosSalidosBombo.push(numero);
+        if (numerosSalidosBombo.indexOf(numero) == -1) {
+            $("#bombo").text(numero);
+            numerosSalidosBombo.push(numero);
+        } else {
+            return getNumeroBombo();
+        }
     }
 }
 /**
