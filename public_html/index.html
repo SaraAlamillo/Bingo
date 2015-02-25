@@ -26,12 +26,19 @@ Versión: 1.00
             <div id="tabla">
                 <div>
                     <div id="columna">
-                        Número de jugadores: <br />
+                        Número de jugadores:<br />
                         Valor del cartón: 
                     </div>
                     <div id="columna">
-                        <input type="number" min="5" max="20" id="numJugadores" onchange="validarJugadores()" /><br />
-                        <input type="number" min="1" max="5" id="valCarton" onchange="validarValor()" />
+                        <input type="text" id="numJugadores" onchange="validarJugadores()" /><br />
+                        <select id="valCarton" onchange="validarValor()">
+                            <option value="" selected="selected"></option>
+                            <option value="1">1 €</option>
+                            <option value="2">2 €</option>
+                            <option value="3">3 €</option>
+                            <option value="4">4 €</option>
+                            <option value="5">5 €</option>
+                        </select>
                     </div>
                 </div>
                 <br />

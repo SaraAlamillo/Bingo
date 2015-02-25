@@ -48,7 +48,12 @@ html, body {
     font-size: 50px;
 }
 
-input[type="number"] {
+#ladoIzquierdo input[type="text"] {
+    padding-left: 5px;
+    box-sizing: border-box;
+    width: 125px;
+}
+#ladoIzquierdo select {
     width: 125px;
 }
 #tabla{

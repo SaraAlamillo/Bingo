@@ -13,16 +13,22 @@ var numerosSalidosBombo;
  * Comprueba si el valor del campo numJugadores está comprendido entre 5 y 20
  */
 function validarJugadores() {
-    if ($("#numJugadores").val() < 5 || $("#numJugadores").val() > 20) {
-        $("#numJugadores").val("");
+    if (!$.isNumeric($("#numJugadores").val())) {
+        $("#numJugadores").val("5");
+    } else if ($("#numJugadores").val() < 5 || $("#numJugadores").val() > 20) {
+        $("#numJugadores").val("5");
+    } else if ($("#numJugadores").val() % 1 !== 0) {
+        $("#numJugadores").val("5");
     }
 }
 /**
  * Comprueba si el valor del campo valCarton está comprendido entre 1 y 5
  */
 function validarValor() {
-    if ($("#valCarton").val() < 1 || $("#valCarton").val() > 5) {
-        $("#valCarton").val("");
+    if (!$.isNumeric($("#valCarton").val())) {
+        $("#valCarton").val("1");
+    } else if ($("#valCarton").val() < 1 || $("#valCarton").val() > 5) {
+        $("#valCarton").val("1");
     }
 }
 /**
